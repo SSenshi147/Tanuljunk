@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tanuljunk.Data;
@@ -12,8 +11,8 @@ using Tanuljunk.Data;
 namespace Tanuljunk.Migrations
 {
     [DbContext(typeof(MainContext))]
-    [Migration("20230819133245_WeatherForecasts")]
-    partial class WeatherForecasts
+    [Migration("20230819194829_WeatherForecastsMysql")]
+    partial class WeatherForecastsMysql
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,21 +20,19 @@ namespace Tanuljunk.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.10")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
-
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Tanuljunk.Models.WeatherForecast", b =>
                 {
                     b.Property<Guid>("Key")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Summary")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<int>("TemperatureC")
                         .HasColumnType("int");
@@ -47,15 +44,15 @@ namespace Tanuljunk.Migrations
                     b.HasData(
                         new
                         {
-                            Key = new Guid("452288c4-a7c5-49f8-8068-5e7092339cff"),
-                            Date = new DateTime(2023, 8, 19, 0, 0, 0, 0, DateTimeKind.Local),
+                            Key = new Guid("1da85155-dd55-410d-b036-295f27320315"),
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddTicks(1234),
                             Summary = "Meleg van",
                             TemperatureC = 32
                         },
                         new
                         {
-                            Key = new Guid("5e35f3cf-b27c-4a84-977c-6807af450939"),
-                            Date = new DateTime(2023, 9, 18, 0, 0, 0, 0, DateTimeKind.Local),
+                            Key = new Guid("f2d23a88-5e5a-4144-9ffb-7ad7a10f1860"),
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddTicks(5678),
                             Summary = "Hideg van",
                             TemperatureC = 3
                         });

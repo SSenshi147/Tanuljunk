@@ -8,6 +8,8 @@ services:
       dockerfile: Tanuljunk/Dockerfile
     depends_on:
         - sql
+        - postgresql
+        - mysql
   sql:
     image: "mcr.microsoft.com/mssql/server:2022-latest"
     container_name: sql_server2022
@@ -15,4 +17,19 @@ services:
         - "1433:1433" 
     environment:
         - ACCEPT_EULA=y
-        - SA_PASSWORD=A&VeryComplex123Password  
+        - SA_PASSWORD=A&VeryComplex123Password
+  postgresql:
+    image: "postgres:latest"
+    container_name: postgresql
+    environment:
+        - POSTGRES_PASSWORD=A&VeryComplex123Password
+    ports:
+        - "5432:5432" 
+  mysql: 
+    image: "mysql:latest"
+    container_name: mysql
+    environment:
+        - MYSQL_ROOT_PASSWORD=A&VeryComplex123Password
+    ports:
+        - "3306:3306"   
+    

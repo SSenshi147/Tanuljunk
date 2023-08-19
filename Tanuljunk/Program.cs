@@ -19,7 +19,9 @@ public class Program
 
         builder.Services.AddDbContext<MainContext>(opt =>
         {
-            opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            //opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            //opt.UseNpgsql(builder.Configuration.GetConnectionString("Postgres"));
+            opt.UseMySQL(builder.Configuration.GetConnectionString("Mysql")!);
         }, ServiceLifetime.Scoped);
 
 
