@@ -6,7 +6,8 @@
       "serviceActions": {
         "tanuljunk": "StartDebugging",
         "cats": "StartDebugging",
-        "dogs": "StartDebugging"
+        "dogs": "StartDebugging",
+        "gateway": "StartDebugging"
       }
     }
   }

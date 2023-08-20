@@ -12,3 +12,9 @@ services:
   dogs:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+
+  gateway:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
