@@ -10,6 +10,7 @@ services:
         - sql
     ports:
         - "55522:80"
+    restart: always
   sql:
     image: "mcr.microsoft.com/mssql/server:2022-latest"
     container_name: sql_server2022
@@ -25,6 +26,8 @@ services:
         - POSTGRES_PASSWORD=A&VeryComplex123Password
     ports:
         - "5432:5432" 
+    restart: always
+  
   mysql: 
     image: "mysql:latest"
     container_name: mysql
@@ -32,6 +35,7 @@ services:
         - MYSQL_ROOT_PASSWORD=A&VeryComplex123Password
     ports:
         - "3306:3306"   
+    restart: always
 
   cats:
     image: ${DOCKER_REGISTRY-}cats
@@ -42,7 +46,7 @@ services:
         - mysql
     ports:
         - "55523:80"
-
+    restart: always
 
   dogs:
     image: ${DOCKER_REGISTRY-}dogs
@@ -53,3 +57,4 @@ services:
         - postgresql
     ports:
         - "55524:80"
+    restart: always
