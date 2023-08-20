@@ -7,17 +7,17 @@ namespace Tanuljunk.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class WeatherForecastController : ControllerBase
+public class WeatherController : ControllerBase
 {
-    private readonly MainContext mainContext;
+    private readonly WeatherContext mainContext;
 
-    public WeatherForecastController(MainContext mainContext)
+    public WeatherController(WeatherContext mainContext)
     {
         this.mainContext = mainContext;
     }
 
-    [HttpGet(Name = "GetWeatherForecast")]
-    public async Task<List<WeatherForecast>> Get()
+    [HttpGet]
+    public async Task<List<Weather>> Get()
     {
         return await this.mainContext.WeatherForecasts.ToListAsync(this.HttpContext.RequestAborted);
     }

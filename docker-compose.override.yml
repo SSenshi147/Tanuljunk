@@ -4,5 +4,11 @@ services:
   tanuljunk:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-    ports:
-      - "80"
+
+  cats:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  dogs:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development

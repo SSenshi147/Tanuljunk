@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Tanuljunk.Migrations
+namespace Cats.Migrations
 {
     /// <inheritdoc />
-    public partial class WeatherForecastsMysql : Migration
+    public partial class Cats : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,27 +17,26 @@ namespace Tanuljunk.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "WeatherForecasts",
+                name: "Cats",
                 columns: table => new
                 {
                     Key = table.Column<Guid>(type: "char(36)", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    TemperatureC = table.Column<int>(type: "int", nullable: false),
-                    Summary = table.Column<string>(type: "longtext", nullable: true)
+                    Name = table.Column<string>(type: "longtext", nullable: false),
+                    Color = table.Column<string>(type: "longtext", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WeatherForecasts", x => x.Key);
+                    table.PrimaryKey("PK_Cats", x => x.Key);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.InsertData(
-                table: "WeatherForecasts",
-                columns: new[] { "Key", "Date", "Summary", "TemperatureC" },
+                table: "Cats",
+                columns: new[] { "Key", "Color", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("1da85155-dd55-410d-b036-295f27320315"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddTicks(1234), "Meleg van", 32 },
-                    { new Guid("f2d23a88-5e5a-4144-9ffb-7ad7a10f1860"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddTicks(5678), "Hideg van", 3 }
+                    { new Guid("29a6e1d3-59b8-41d3-a08a-c7e8b28c266d"), "orange", "very dumb cat" },
+                    { new Guid("a144b2b7-34b3-4530-b5da-448f3734f8ba"), "black", "smart cat" }
                 });
         }
 
@@ -45,7 +44,7 @@ namespace Tanuljunk.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "WeatherForecasts");
+                name: "Cats");
         }
     }
 }

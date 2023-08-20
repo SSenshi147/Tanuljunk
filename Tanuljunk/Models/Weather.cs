@@ -1,12 +1,10 @@
+using Common;
 using System.ComponentModel.DataAnnotations;
 
 namespace Tanuljunk.Models;
 
-public class WeatherForecast
+public class Weather : EntityBase
 {
-    [Key]
-    public Guid Key { get; set; }
-
     public DateTime Date { get; set; }
 
     public int TemperatureC { get; set; }

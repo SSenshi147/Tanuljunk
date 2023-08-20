@@ -3,28 +3,28 @@ using Tanuljunk.Models;
 
 namespace Tanuljunk.Data;
 
-public class MainContext : DbContext
+public class WeatherContext : DbContext
 {
-    public MainContext(DbContextOptions options) : base(options)
+    public WeatherContext(DbContextOptions options) : base(options)
     {
     }
 
-    public DbSet<WeatherForecast> WeatherForecasts { get; set; }
+    public DbSet<Weather> WeatherForecasts { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
-        var weatherForecasts = new List<WeatherForecast>()
+        var weatherForecasts = new List<Weather>()
         {
-            new WeatherForecast()
+            new Weather()
             {
                 Key = Guid.NewGuid(),
                 Date = new DateTime(1234, DateTimeKind.Utc), // postgres miatt meg kell mondani explicit a datetimekindot
                 Summary = "Meleg van",
                 TemperatureC = 32,
             },
-            new WeatherForecast()
+            new Weather()
             {
                 Key = Guid.NewGuid(),
                 Date = new DateTime(5678, DateTimeKind.Utc),
@@ -33,6 +33,6 @@ public class MainContext : DbContext
             }
         };
 
-        modelBuilder.Entity<WeatherForecast>().HasData(weatherForecasts);
+        modelBuilder.Entity<Weather>().HasData(weatherForecasts);
     }
 }

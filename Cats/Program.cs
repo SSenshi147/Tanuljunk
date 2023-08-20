@@ -1,8 +1,7 @@
+using Cats.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Tanuljunk.Data;
 
-namespace Tanuljunk;
+namespace Cats;
 
 public class Program
 {
@@ -17,12 +16,10 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        builder.Services.AddDbContext<WeatherContext>(opt =>
+        builder.Services.AddDbContext<CatContext>(opt =>
         {
-            opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-            //opt.UseNpgsql();
-        }, ServiceLifetime.Scoped);
-
+            opt.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection")!);
+        });
 
         var app = builder.Build();
 
@@ -35,7 +32,7 @@ public class Program
 
         app.UseAuthorization();
 
-
+        
         app.MapControllers();
 
 
@@ -43,7 +40,7 @@ public class Program
         {
             var services = scope.ServiceProvider;
 
-            var context = services.GetRequiredService<WeatherContext>();
+            var context = services.GetRequiredService<CatContext>();
             if (context.Database.GetPendingMigrations().Any())
             {
                 context.Database.Migrate();

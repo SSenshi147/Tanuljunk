@@ -8,8 +8,8 @@ services:
       dockerfile: Tanuljunk/Dockerfile
     depends_on:
         - sql
-        - postgresql
-        - mysql
+    ports:
+        - "55522:80"
   sql:
     image: "mcr.microsoft.com/mssql/server:2022-latest"
     container_name: sql_server2022
@@ -32,4 +32,24 @@ services:
         - MYSQL_ROOT_PASSWORD=A&VeryComplex123Password
     ports:
         - "3306:3306"   
-    
+
+  cats:
+    image: ${DOCKER_REGISTRY-}cats
+    build:
+      context: .
+      dockerfile: Cats/Dockerfile
+    depends_on:
+        - mysql
+    ports:
+        - "55523:80"
+
+
+  dogs:
+    image: ${DOCKER_REGISTRY-}dogs
+    build:
+      context: .
+      dockerfile: Dogs/Dockerfile
+    depends_on:
+        - postgresql
+    ports:
+        - "55524:80"
