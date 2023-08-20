@@ -8,8 +8,8 @@ services:
       dockerfile: Tanuljunk/Dockerfile
     depends_on:
         - sql
-    ports:
-        - "55522:80"
+    expose:
+        - 80
     restart: always
     container_name: tanuljunk
     hostname: tanuljunk
@@ -18,8 +18,8 @@ services:
   sql:
     image: "mcr.microsoft.com/mssql/server:2022-latest"
     container_name: sql_server2022
-    ports:
-        - "1433:1433" 
+    expose:
+        - 1433
     environment:
         - ACCEPT_EULA=y
         - SA_PASSWORD=A&VeryComplex123Password
@@ -29,8 +29,8 @@ services:
     container_name: postgresql
     environment:
         - POSTGRES_PASSWORD=A&VeryComplex123Password
-    ports:
-        - "5432:5432" 
+    expose:
+        - 5432
     restart: always
   
   mysql: 
@@ -38,8 +38,8 @@ services:
     container_name: mysql
     environment:
         - MYSQL_ROOT_PASSWORD=A&VeryComplex123Password
-    ports:
-        - "3306:3306"   
+    expose:
+        - 3306
     restart: always
 
   cats:
@@ -49,8 +49,8 @@ services:
       dockerfile: Cats/Dockerfile
     depends_on:
         - mysql
-    ports:
-        - "55523:80"
+    expose:
+        - 80
     restart: always
     container_name: cats
     hostname: cats
@@ -63,8 +63,8 @@ services:
       dockerfile: Dogs/Dockerfile
     depends_on:
         - postgresql
-    ports:
-        - "55524:80"
+    expose:
+        - 80
     restart: always
     container_name: dogs
     hostname: dogs

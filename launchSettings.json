@@ -3,11 +3,17 @@
     "Docker Compose": {
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "gateway",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}",
       "serviceActions": {
         "tanuljunk": "StartDebugging",
         "cats": "StartDebugging",
         "dogs": "StartDebugging",
-        "gateway": "StartDebugging"
+        "gateway": "StartDebugging",
+        "mysql": "StartWithoutDebugging",
+        "postgresql": "StartWithoutDebugging",
+        "sql": "StartWithoutDebugging"
       }
     }
   }
