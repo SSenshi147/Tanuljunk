@@ -14,7 +14,7 @@
       ],
       "UpstreamPathTemplate": "/cat",
       "UpstreamHttpMethod": [
-        "GET"
+        "GET", "POST"
       ]
     },
     {
@@ -27,6 +27,20 @@
         }
       ],
       "UpstreamPathTemplate": "/dog",
+      "UpstreamHttpMethod": [
+        "GET"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/dog/knownCats",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "dogs",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/dog/knownCats",
       "UpstreamHttpMethod": [
         "GET"
       ]

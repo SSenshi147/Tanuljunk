@@ -1,5 +1,8 @@
 using Dogs.Data;
+using Dogs.Services;
 using Microsoft.EntityFrameworkCore;
+using MassTransit;
+using System.Configuration;
 
 namespace Dogs;
 
@@ -19,6 +22,23 @@ public class Program
         builder.Services.AddDbContext<DogContext>(opt =>
         {
             opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+        });
+
+        //builder.Services.AddHostedService<CatConsumerService>();
+
+        builder.Services.AddMassTransit(config =>
+        {
+            config.AddConsumer<CatConsumer>();
+
+            config.UsingRabbitMq((ctx, conf) =>
+            {
+                conf.Host("amqp://guest:guest@rabbitmq:5672");
+
+                conf.ReceiveEndpoint("order-queue", c =>
+                {
+                    c.ConfigureConsumer<CatConsumer>(ctx);
+                });
+            });
         });
 
         var app = builder.Build();

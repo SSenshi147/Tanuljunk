@@ -1,5 +1,7 @@
 using Cats.Data;
 using Microsoft.EntityFrameworkCore;
+using MassTransit;
+using MassTransit.RabbitMqTransport;
 
 namespace Cats;
 
@@ -21,6 +23,22 @@ public class Program
             opt.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection")!);
         });
 
+        builder.Services.AddMassTransit(config =>
+        {
+            config.UsingRabbitMq((a, b) =>
+            {
+                //b.Host(host: "rabbitmq", port: 5672, virtualHost: "/", connectionName: "rabbitmq", conf =>
+                //{
+                //    conf.Username("guest");
+                //    conf.Password("guest");
+                //});
+
+                b.Host("amqp://guest:guest@rabbitmq:5672");
+
+                b.ConfigureEndpoints(a);
+            });
+        });
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -32,7 +50,7 @@ public class Program
 
         app.UseAuthorization();
 
-        
+
         app.MapControllers();
 
 

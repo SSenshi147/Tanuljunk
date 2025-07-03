@@ -10,6 +10,7 @@ public class DogContext : DbContext
     }
 
     public DbSet<Dog> Dogs { get; set; }
+    public DbSet<KnownCat> KnownCats { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

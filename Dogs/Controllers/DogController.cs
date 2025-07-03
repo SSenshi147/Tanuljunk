@@ -21,4 +21,10 @@ public class DogController : ControllerBase
     {
         return await this.dogContext.Dogs.ToListAsync(this.HttpContext.RequestAborted);
     }
+
+    [HttpGet("knownCats")]
+    public async Task<List<KnownCat>> GetKnownCats()
+    {
+        return await this.dogContext.KnownCats.ToListAsync(this.HttpContext.RequestAborted);
+    }
 }
